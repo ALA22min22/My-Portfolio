@@ -1,0 +1,276 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 230 37% 9%;
+    --foreground: 210 40% 98%;
+    --card: 230 37% 9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 230 37% 9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 18 100% 54%;
+    --primary-foreground: 230 37% 9%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  
+  html {
+    scroll-behavior: auto; /* Let Lenis handle smooth scrolling */
+  }
+  
+  html.lenis {
+    height: auto;
+  }
+  
+  .lenis.lenis-smooth {
+    scroll-behavior: auto;
+  }
+  
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+  
+  .lenis.lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  /* Performance optimizations to eliminate lag */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* GPU acceleration for smooth rendering */
+  .glass-panel,
+  section,
+  [class*="motion-"] {
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Optimize animations */
+  @media (prefers-reduced-motion: no-preference) {
+    * {
+      animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+  }
+
+  /* Reduce paint and composite layers */
+  img, video, canvas {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  /* Optimize backdrop-filter performance */
+  .glass-panel {
+    contain: layout style paint;
+  }
+
+  /* Toast notification styles */
+  [data-sonner-toaster] {
+    z-index: 9999 !important;
+  }
+
+  [data-sonner-toast] {
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+}
+
+@layer utilities {
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-left: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .glass-input {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    color: white;
+  }
+
+  .glass-input:focus {
+    outline: none;
+    border-color: rgba(0, 221, 255, 0.5);
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px rgba(0, 221, 255, 0.3);
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
+
+  /* Prevent scrolling during preloader */
+  .no-scroll {
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  /* Simple float animation for About section badge */
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .liquid-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: 
+      radial-gradient(circle at 15% 50%, rgba(76, 29, 149, 0.4), transparent 50%),
+      radial-gradient(circle at 85% 30%, rgba(190, 24, 93, 0.25), transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(29, 78, 216, 0.3), transparent 50%);
+    background-size: 200% 200%;
+    animation: bg-shift 20s ease infinite;
+    will-change: background-position;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+    filter: blur(80px);
+    opacity: 0.6;
+    transition: all 1s ease-in-out;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+  }
+
+  .blob-1 {
+    top: -10%;
+    left: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: #4c1d95;
+    animation: organic-move-1 25s infinite ease-in-out alternate;
+  }
+
+  .blob-2 {
+    bottom: -10%;
+    right: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: #be185d;
+    animation: organic-move-2 20s infinite ease-in-out alternate;
+  }
+
+  .blob-3 {
+    top: 40%;
+    left: 30%;
+    width: 40vw;
+    height: 40vw;
+    background: #1d4ed8;
+    opacity: 0.4;
+    animation: organic-move-3 22s infinite ease-in-out alternate;
+  }
+
+  @keyframes bg-shift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes organic-move-1 {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    50% {
+      transform: translate(10%, 10%) scale(1.1) rotate(20deg);
+      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+    }
+    100% {
+      transform: translate(-5%, 5%) scale(0.9) rotate(-10deg);
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+  }
+
+  @keyframes organic-move-2 {
+    0% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+      border-radius: 40% 60% 60% 40% / 50% 60% 30% 60%;
+    }
+    50% {
+      transform: translate(-10%, -5%) scale(1.2) rotate(-15deg);
+      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    }
+    100% {
+      transform: translate(5%, -10%) scale(0.85) rotate(10deg);
+      border-radius: 40% 60% 60% 40% / 50% 60% 30% 60%;
+    }
+  }
+
+  @keyframes organic-move-3 {
+    0% {
+      transform: translate(0, 0) scale(1);
+      border-radius: 50%;
+    }
+    33% {
+      transform: translate(15%, -10%) scale(1.1);
+      border-radius: 60% 40% 50% 50% / 40% 60% 60% 40%;
+    }
+    66% {
+      transform: translate(-10%, 15%) scale(0.9);
+      border-radius: 40% 60% 40% 60% / 60% 40% 60% 40%;
+    }
+    100% {
+      transform: translate(0, 0) scale(1);
+      border-radius: 50%;
+    }
+  }
+}
